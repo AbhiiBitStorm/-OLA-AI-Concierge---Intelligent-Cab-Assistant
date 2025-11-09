@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OLA AI Concierge - Intelligent Cab Assistant</title>
+    <link rel="stylesheet" href="style.css">
+    <!-- Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <div class="logo">
+                <i class="fas fa-taxi"></i>
+                <span>OLA AI Concierge</span>
+            </div>
+            <nav class="nav">
+                <button class="nav-btn active" data-section="chat">
+                    <i class="fas fa-comments"></i> Chat
+                </button>
+                <button class="nav-btn" data-section="booking">
+                    <i class="fas fa-car"></i> Book Ride
+                </button>
+                <button class="nav-btn" data-section="track">
+                    <i class="fas fa-map-marker-alt"></i> Track
+                </button>
+                <button class="nav-btn" data-section="support">
+                    <i class="fas fa-headset"></i> Support
+                </button>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Main Container -->
+    <main class="main-container">
+        
+        <!-- Chat Section (Default) -->
+        <section id="chat-section" class="content-section active">
+            <div class="chat-container">
+                
+                <!-- Sidebar with Quick Actions -->
+                <aside class="sidebar">
+                    <h3>Quick Actions</h3>
+                    
+                    <div class="quick-action" onclick="sendQuickMessage('Book a cab from my location')">
+                        <i class="fas fa-map-pin"></i>
+                        <span>Book from Current Location</span>
+                    </div>
+                    
+                    <div class="quick-action" onclick="sendQuickMessage('Estimate fare from Airport to Andheri')">
+                        <i class="fas fa-calculator"></i>
+                        <span>Calculate Fare</span>
+                    </div>
+                    
+                    <div class="quick-action" onclick="sendQuickMessage('Show my recent bookings')">
+                        <i class="fas fa-history"></i>
+                        <span>Recent Rides</span>
+                    </div>
+                    
+                    <div class="quick-action" onclick="sendQuickMessage('Cancel my last booking')">
+                        <i class="fas fa-times-circle"></i>
+                        <span>Cancel Ride</span>
+                    </div>
+
+                    <div class="quick-action" onclick="sendQuickMessage('I lost something in the cab')">
+                        <i class="fas fa-box"></i>
+                        <span>Lost Item</span>
+                    </div>
+                    
+                    <hr style="margin: 20px 0; opacity: 0.2;">
+                    
+                    <h3>Cab Types</h3>
+                    <div class="cab-types">
+                        <div class="cab-card">
+                            <i class="fas fa-car"></i>
+                            <p>Mini</p>
+                            <span>₹8/km</span>
+                        </div>
+                        <div class="cab-card">
+                            <i class="fas fa-car-side"></i>
+                            <p>Prime</p>
+                            <span>₹12/km</span>
+                        </div>
+                        <div class="cab-card">
+                            <i class="fas fa-motorcycle"></i>
+                            <p>Auto</p>
+                            <span>₹7/km</span>
+                        </div>
+                    </div>
+                </aside>
+
+                <!-- Chat Area -->
+                <div class="chat-area">
+                    
+                    <!-- Chat Header -->
+                    <div class="chat-header">
+                        <div class="status">
+                            <div class="status-indicator online"></div>
+                            <div>
+                                <h4>AI Assistant</h4>
+                                <p>Powered by Mistral-7B</p>
+                            </div>
+                        </div>
+                        <button class="clear-chat" onclick="clearChat()">
+                            <i class="fas fa-trash"></i> Clear
+                        </button>
+                    </div>
+
+                    <!-- Messages Container -->
+                    <div class="messages" id="messages">
+                        <!-- Welcome Message -->
+                        <div class="message bot-message">
+                            <div class="avatar bot-avatar">
+                                <i class="fas fa-robot"></i>
+                            </div>
+                            <div class="message-content">
+                                <p>👋 Welcome to OLA AI Concierge!</p>
+                                <p>I can help you with:</p>
+                                <ul>
+                                    <li>🚖 Book cabs instantly</li>
+                                    <li>💰 Calculate fares</li>
+                                    <li>📍 Track your rides</li>
+                                    <li>🆘 Customer support 24/7</li>
+                                </ul>
+                                <p><strong>How can I assist you today?</strong></p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Input Area -->
+                    <div class="input-area">
+                        <button class="attach-btn" title="Attach file">
+                            <i class="fas fa-paperclip"></i>
+                        </button>
+                        <input 
+                            type="text" 
+                            id="messageInput" 
+                            placeholder="Type your message... (e.g., Book a cab from Bandra to Airport)"
+                            autocomplete="off"
+                        />
+                        <button class="voice-btn" title="Voice input">
+                            <i class="fas fa-microphone"></i>
+                        </button>
+                        <button class="send-btn" onclick="sendMessage()" id="sendBtn">
+                            <i class="fas fa-paper-plane"></i>
+                        </button>
+                    </div>
+
+                    <!-- Typing Indicator -->
+                    <div class="typing-indicator" id="typingIndicator" style="display: none;">
+                        <div class="avatar bot-avatar">
+                            <i class="fas fa-robot"></i>
+                        </div>
+                        <div class="typing-dots">
+                            <span></span>
+                            <span></span>
+                            <span></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Booking Section -->
+        <section id="booking-section" class="content-section">
+            <div class="booking-container">
+                <h2><i class="fas fa-car"></i> Book Your Ride</h2>
+                
+                <form class="booking-form" id="bookingForm">
+                    <div class="form-group">
+                        <label><i class="fas fa-map-marker-alt"></i> Pickup Location</label>
+                        <input type="text" id="pickup" placeholder="Enter pickup location" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label><i class="fas fa-flag-checkered"></i> Drop Location</label>
+                        <input type="text" id="drop" placeholder="Enter drop location" required>
+                    </div>
+                    
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label><i class="fas fa-car"></i> Cab Type</label>
+                            <select id="cabType">
+                                <option value="mini">Mini - ₹8/km</option>
+                                <option value="prime">Prime - ₹12/km</option>
+                                <option value="auto">Auto - ₹7/km</option>
+                            </select>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label><i class="fas fa-clock"></i> Schedule (Optional)</label>
+                            <input type="datetime-local" id="scheduleTime">
+                        </div>
+                    </div>
+                    
+                    <button type="submit" class="btn-primary">
+                        <i class="fas fa-check"></i> Book Now
+                    </button>
+                </form>
+
+                <!-- Fare Estimate Card -->
+                <div class="fare-estimate-card" id="fareCard" style="display: none;">
+                    <h3>Fare Estimate</h3>
+                    <div id="fareDetails"></div>
+                </div>
+
+                <!-- Booking Confirmation -->
+                <div class="booking-confirmation" id="bookingConfirmation" style="display: none;">
+                    <div class="confirmation-icon">
+                        <i class="fas fa-check-circle"></i>
+                    </div>
+                    <h3>Booking Confirmed!</h3>
+                    <div id="confirmationDetails"></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Track Section -->
+        <section id="track-section" class="content-section">
+            <div class="track-container">
+                <h2><i class="fas fa-location-arrow"></i> Track Your Ride</h2>
+                
+                <div class="track-input-group">
+                    <input type="text" id="bookingId" placeholder="Enter Booking ID">
+                    <button onclick="trackRide()" class="btn-primary">
+                        <i class="fas fa-search"></i> Track
+                    </button>
+                </div>
+
+                <!-- Tracking Info -->
+                <div class="tracking-info" id="trackingInfo" style="display: none;">
+                    <div class="driver-card">
+                        <div class="driver-avatar">
+                            <i class="fas fa-user-tie"></i>
+                        </div>
+                        <div class="driver-details" id="driverDetails"></div>
+                    </div>
+                    
+                    <div class="ride-status" id="rideStatus"></div>
+                    
+                    <!-- Mock Map -->
+                    <div class="map-container">
+                        <div class="map-placeholder">
+                            <i class="fas fa-map"></i>
+                            <p>Live tracking map</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Support Section -->
+        <section id="support-section" class="content-section">
+            <div class="support-container">
+                <h2><i class="fas fa-headset"></i> Customer Support</h2>
+                
+                <div class="support-options">
+                    <div class="support-card" onclick="sendSupportMessage('Refund request')">
+                        <i class="fas fa-money-bill-wave"></i>
+                        <h3>Refund Request</h3>
+                        <p>Request refund for cancelled ride</p>
+                    </div>
+                    
+                    <div class="support-card" onclick="sendSupportMessage('Report driver')">
+                        <i class="fas fa-exclamation-triangle"></i>
+                        <h3>Report Issue</h3>
+                        <p>Report driver or ride issue</p>
+                    </div>
+                    
+                    <div class="support-card" onclick="sendSupportMessage('Lost item in cab')">
+                        <i class="fas fa-box-open"></i>
+                        <h3>Lost Items</h3>
+                        <p>Report lost belongings</p>
+                    </div>
+                    
+                    <div class="support-card" onclick="sendSupportMessage('Change payment method')">
+                        <i class="fas fa-credit-card"></i>
+                        <h3>Payment Help</h3>
+                        <p>Payment & billing support</p>
+                    </div>
+                </div>
+
+                <!-- Emergency Contact -->
+                <div class="emergency-contact">
+                    <i class="fas fa-phone-alt"></i>
+                    <div>
+                        <h4>24/7 Emergency Helpline</h4>
+                        <p class="phone-number">1800-XXX-XXXX</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Loading Overlay -->
+    <div class="loading-overlay" id="loadingOverlay">
+        <div class="spinner"></div>
+        <p>Processing...</p>
+    </div>
+
+    <!-- Toast Notification -->
+    <div class="toast" id="toast"></div>
+
+    <script src="script.js"></script>
+</body>
+</html>

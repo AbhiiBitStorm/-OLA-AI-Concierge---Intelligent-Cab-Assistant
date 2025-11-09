@@ -1,0 +1,296 @@
+# ============================================
+# Python
+# ============================================
+
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+*.pyc
+*.pyo
+*.pyd
+.Python
+
+# Virtual Environment
+venv/
+env/
+ENV/
+.venv
+.env/
+venv.bak/
+virtualenv/
+pipenv/
+.pipenv/
+
+# Distribution / packaging
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+MANIFEST
+pip-wheel-metadata/
+
+# PyInstaller
+*.manifest
+*.spec
+
+# Unit test / coverage reports
+htmlcov/
+.tox/
+.nox/
+.coverage
+.coverage.*
+.cache
+nosetests.xml
+coverage.xml
+*.cover
+*.py,cover
+.hypothesis/
+.pytest_cache/
+cover/
+
+# Jupyter Notebook
+.ipynb_checkpoints
+*.ipynb
+
+# pyenv
+.python-version
+
+# ============================================
+# AI Models (Large Files)
+# ============================================
+
+# Model files (too large for Git)
+*.gguf
+*.ggml
+*.bin
+*.pth
+*.pt
+*.safetensors
+*.onnx
+*.pkl
+*.h5
+*.hdf5
+*.pb
+*.tflite
+model/
+models/
+ai_models/
+
+# Model downloads
+*.download
+*.part
+*.tmp
+
+# ============================================
+# Database & Data Files
+# ============================================
+
+# Database files
+*.db
+*.sqlite
+*.sqlite3
+*.sql
+
+# JSON data files (optional - remove if you want to track)
+data/*.json
+data/bookings.json
+data/users.json
+data/conversations.json
+data/fares.json
+
+# Backup files
+*.bak
+*.backup
+*~
+
+# ============================================
+# Environment & Config
+# ============================================
+
+# Environment variables
+.env
+.env.local
+.env.*.local
+.env.development
+.env.production
+.env.test
+
+# Config files with secrets
+config.ini
+secrets.json
+credentials.json
+*.key
+*.pem
+*.cert
+
+# ============================================
+# IDE & Editors
+# ============================================
+
+# VSCode
+.vscode/
+*.code-workspace
+.history/
+
+# PyCharm
+.idea/
+*.iml
+*.iws
+*.ipr
+
+# Sublime Text
+*.sublime-project
+*.sublime-workspace
+
+# Vim
+*.swp
+*.swo
+*~
+.netrwhist
+
+# Emacs
+*~
+\#*\#
+.\#*
+
+# Windows
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+$RECYCLE.BIN/
+
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+._*
+
+# ============================================
+# Logs & Temporary Files
+# ============================================
+
+# Log files
+logs/
+*.log
+*.log.*
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+lerna-debug.log*
+
+# Temporary files
+tmp/
+temp/
+*.tmp
+*.temp
+*.pid
+*.seed
+*.pid.lock
+
+# ============================================
+# Node.js (if using for frontend)
+# ============================================
+
+node_modules/
+jspm_packages/
+package-lock.json
+yarn.lock
+.pnp
+.pnp.js
+
+# ============================================
+# Documentation
+# ============================================
+
+# Sphinx documentation
+docs/_build/
+docs/_static/
+docs/_templates/
+
+# MkDocs
+site/
+
+# ============================================
+# Testing
+# ============================================
+
+# Test output
+test-results/
+test-output/
+*.test
+*.spec
+
+# ============================================
+# Security
+# ============================================
+
+# API Keys
+*api_key*
+*apikey*
+*API_KEY*
+
+# AWS
+.aws/
+aws.json
+
+# Google Cloud
+.gcloud/
+gcloud.json
+service-account.json
+
+# Azure
+.azure/
+
+# ============================================
+# Project Specific
+# ============================================
+
+# Ola specific
+ola_credentials.json
+driver_data/
+ride_history/
+
+# Chat histories (if sensitive)
+chat_logs/
+conversation_history/
+
+# Model weights (keep only config)
+*.weights
+checkpoint/
+
+# Frontend build
+frontend/build/
+frontend/dist/
+frontend/.cache/
+
+# Backend specific
+backend/static/
+backend/media/
+
+# Docker
+docker-compose.override.yml
+.dockerignore
+
+# ============================================
+# Keep These Files
+# ============================================
+
+# Keep these tracked
+!.gitignore
+!.gitkeep
+!README.md
+!LICENSE
+!requirements.txt
+!package.json
